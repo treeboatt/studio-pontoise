@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studio meublé à louer — Centre-ville de Pontoise</title>
+<meta name="description" content="Studio meublé 26,5m², entièrement rénové, à 5 minutes de la gare de Pontoise. Libre le 20 juin 2026.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --paper:#F6F3EC;
+    --paper-2:#EFEAE0;
+    --ink:#221F1B;
+    --ink-soft:#4C463D;
+    --rust:#B85C2E;
+    --rust-deep:#9A4A22;
+    --sage:#8C9686;
+    --line: rgba(34,31,27,0.12);
+    --ease: cubic-bezier(.22,1,.36,1);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', -apple-system, sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{
+    font-family:'Fraunces', Georgia, serif;
+    font-weight:500;
+    letter-spacing:-0.01em;
+    line-height:1.06;
+    margin:0;
+  }
+  .eyebrow{
+    font-family:'Inter';
+    text-transform:uppercase;
+    letter-spacing:0.16em;
+    font-size:0.72rem;
+    font-weight:600;
+    color:var(--rust-deep);
+  }
+  a{color:inherit;}
+  img{display:block;max-width:100%;}
+  .wrap{
+    max-width:1200px;
+    margin:0 auto;
+    padding-left:6vw;
+    padding-right:6vw;
+  }
+  @media(min-width:1000px){
+    .wrap{padding-left:64px;padding-right:64px;}
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    padding:22px 6vw;
+    display:flex;align-items:center;justify-content:space-between;
+    transition:background .4s var(--ease), padding .4s var(--ease), box-shadow .4s var(--ease);
+  }
+  header.scrolled{
+    background:rgba(246,243,236,0.86);
+    backdrop-filter:blur(14px) saturate(1.4);
+    -webkit-backdrop-filter:blur(14px) saturate(1.4);
+    padding:14px 6vw;
+    box-shadow:0 1px 0 var(--line);
+  }
+  .logo{
+    font-family:'Fraunces';
+    font-size:1.15rem;
+    font-weight:500;
+    letter-spacing:0.01em;
+  }
+  .logo span{color:var(--rust);}
+  nav.links{display:none;gap:36px;font-size:0.9rem;font-weight:500;}
+  @media(min-width:860px){nav.links{display:flex;}}
+  nav.links a{
+    position:relative;padding-bottom:4px;opacity:0.82;
+    transition:opacity .25s var(--ease);
+  }
+  nav.links a:hover{opacity:1;}
+  nav.links a::after{
+    content:'';position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--ink);
+    transition:right .3s var(--ease);
+  }
+  nav.links a:hover::after{right:0;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 22px;
+    border-radius:2px;
+    font-size:0.86rem;font-weight:600;letter-spacing:0.01em;
+    cursor:pointer;border:none;
+    transition:transform .3s var(--ease), box-shadow .3s var(--ease), background .3s var(--ease);
+  }
+  .btn-primary{
+    background:var(--rust);color:var(--paper);
+  }
+  .btn-primary:hover{background:var(--rust-deep);transform:translateY(-2px);box-shadow:0 10px 24px -8px rgba(154,74,34,0.55);}
+  .btn-ghost{
+    background:transparent;color:var(--ink);border:1px solid var(--line);
+  }
+  .btn-ghost:hover{border-color:var(--ink);transform:translateY(-2px);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;height:100svh;min-height:640px;
+    display:flex;align-items:flex-end;
+    overflow:hidden;
+  }
+  .hero-media{position:absolute;inset:0;}
+  .hero-media img{width:100%;height:100%;object-fit:cover;
+    transform:scale(1.08);
+    animation:heroZoom 16s var(--ease) forwards;
+  }
+  @keyframes heroZoom{to{transform:scale(1);}}
+  .hero-scrim{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(20,17,14,0.15) 0%, rgba(20,17,14,0.10) 40%, rgba(20,17,14,0.72) 100%);
+  }
+  .hero-content{
+    position:relative;z-index:2;width:100%;
+    padding:0 6vw 72px;
+    color:#F6F3EC;
+  }
+  .hero-eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    text-transform:uppercase;letter-spacing:0.2em;font-size:0.72rem;font-weight:600;
+    margin-bottom:22px;opacity:0;
+    animation:riseIn .9s var(--ease) .3s forwards;
+  }
+  .hero-eyebrow::before{content:'';width:26px;height:1px;background:#D8A47F;}
+  .hero h1{
+    font-size:clamp(2.6rem, 6.6vw, 5.6rem);
+    color:#F9F6EF;
+    max-width:14ch;
+    opacity:0;
+    animation:riseIn 1s var(--ease) .45s forwards;
+  }
+  .hero h1 em{font-style:italic;color:#E4A876;font-weight:400;}
+  .hero-sub{
+    margin-top:22px;font-size:1.05rem;max-width:44ch;color:#E9E4D8;
+    opacity:0;animation:riseIn 1s var(--ease) .65s forwards;
+  }
+  .hero-cta-row{
+    margin-top:38px;display:flex;gap:16px;flex-wrap:wrap;align-items:center;
+    opacity:0;animation:riseIn 1s var(--ease) .82s forwards;
+  }
+  @keyframes riseIn{
+    from{opacity:0;transform:translateY(26px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+  .hero-meta{
+    position:absolute;right:6vw;bottom:36px;z-index:2;
+    display:none;flex-direction:column;gap:10px;text-align:right;
+    color:#F1ECE1;opacity:0;animation:riseIn 1s var(--ease) 1s forwards;
+  }
+  @media(min-width:780px){.hero-meta{display:flex;}}
+  .hero-meta .num{font-family:'Fraunces';font-size:1.6rem;}
+  .hero-meta .lbl{font-size:0.68rem;text-transform:uppercase;letter-spacing:0.14em;opacity:0.75;}
+  .scroll-cue{
+    position:absolute;left:6vw;bottom:36px;z-index:2;
+    display:flex;align-items:center;gap:10px;color:#F1ECE1;font-size:0.72rem;
+    letter-spacing:0.12em;text-transform:uppercase;
+    opacity:0;animation:riseIn 1s var(--ease) 1.1s forwards;
+  }
+  .scroll-cue .line{width:1px;height:34px;background:rgba(241,236,225,0.5);position:relative;overflow:hidden;}
+  .scroll-cue .line::after{
+    content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;background:#E4A876;
+    animation:scrollLine 1.8s ease-in-out infinite;
+  }
+  @keyframes scrollLine{
+    0%{top:-100%;} 50%{top:0;} 100%{top:100%;}
+  }
+
+  /* ---------- reveal on scroll ---------- */
+  .reveal{opacity:0;transform:translateY(36px);transition:opacity .9s var(--ease), transform .9s var(--ease);}
+  .reveal.in{opacity:1;transform:translateY(0);}
+  .reveal-1{transition-delay:.05s;} .reveal-2{transition-delay:.14s;} .reveal-3{transition-delay:.23s;} .reveal-4{transition-delay:.32s;}
+
+  /* ---------- SECTION generic ---------- */
+  section{padding:120px 0;}
+  @media(max-width:700px){section{padding:76px 0;}}
+  .section-head{
+    display:flex;flex-direction:column;gap:16px;max-width:640px;margin-bottom:64px;
+  }
+  .section-head h2{font-size:clamp(2rem,4.2vw,3.1rem);}
+  .section-head p{color:var(--ink-soft);font-size:1.02rem;max-width:52ch;}
+
+  /* ---------- INTRO / story split ---------- */
+  .intro{
+    display:grid;grid-template-columns:1fr;gap:56px;align-items:center;
+  }
+  @media(min-width:900px){.intro{grid-template-columns: 0.9fr 1.1fr;gap:80px;}}
+  .intro-figure{position:relative;}
+  .intro-figure img{
+    width:100%;height:560px;object-fit:cover;border-radius:2px;
+  }
+  .intro-badge{
+    position:absolute;left:-24px;bottom:-24px;
+    background:var(--paper);border:1px solid var(--line);
+    padding:22px 26px;max-width:230px;
+    box-shadow:0 24px 48px -20px rgba(34,31,27,0.28);
+  }
+  .intro-badge .num{font-family:'Fraunces';font-size:2.1rem;color:var(--rust);}
+  .intro-badge .lbl{font-size:0.78rem;color:var(--ink-soft);margin-top:4px;}
+  .intro-text p{color:var(--ink-soft);font-size:1.05rem;margin:0 0 20px;}
+  .intro-text .drop{
+    font-family:'Fraunces';font-size:1.5rem;color:var(--ink);line-height:1.4;font-weight:400;
+    margin-bottom:26px;
+  }
+  .stat-row{display:flex;gap:40px;margin-top:40px;flex-wrap:wrap;}
+  .stat-row .stat{border-top:1px solid var(--line);padding-top:14px;min-width:100px;}
+  .stat-row .stat b{display:block;font-family:'Fraunces';font-size:1.7rem;font-weight:500;}
+  .stat-row .stat span{font-size:0.78rem;color:var(--ink-soft);}
+
+  /* ---------- GALLERY ---------- */
+  .gallery-grid{
+    display:grid;grid-template-columns:repeat(6,1fr);gap:14px;
+  }
+  @media(max-width:760px){.gallery-grid{grid-template-columns:repeat(2,1fr);gap:10px;}}
+  .g-item{
+    position:relative;overflow:hidden;border-radius:2px;cursor:pointer;
+    background:var(--paper-2);
+  }
+  .g-item img{
+    width:100%;height:100%;object-fit:cover;
+    transition:transform .7s var(--ease);
+  }
+  .g-item:hover img{transform:scale(1.07);}
+  .g-item .g-tag{
+    position:absolute;left:14px;bottom:14px;color:#fff;font-size:0.72rem;
+    text-transform:uppercase;letter-spacing:0.1em;font-weight:600;
+    opacity:0;transform:translateY(8px);
+    transition:opacity .35s var(--ease), transform .35s var(--ease);
+  }
+  .g-item::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%);
+    opacity:0;transition:opacity .35s var(--ease);
+  }
+  .g-item:hover::after,.g-item:hover .g-tag{opacity:1;transform:translateY(0);}
+  .g-a{grid-column:span 3;grid-row:span 2;aspect-ratio:4/5;}
+  .g-b{grid-column:span 3;aspect-ratio:16/10;}
+  .g-c{grid-column:span 3;aspect-ratio:16/10;}
+  .g-d{grid-column:span 2;aspect-ratio:1/1;}
+  .g-e{grid-column:span 2;aspect-ratio:1/1;}
+  .g-f{grid-column:span 2;aspect-ratio:1/1;}
+  @media(max-width:760px){
+    .g-a{grid-column:span 2;grid-row:span 1;aspect-ratio:4/3;}
+    .g-b,.g-c,.g-d,.g-e,.g-f{grid-column:span 1;aspect-ratio:1/1;}
+  }
+
+  /* ---------- FEATURES ---------- */
+  .feat-grid{display:grid;grid-template-columns:repeat(1,1fr);gap:2px;background:var(--line);border:1px solid var(--line);}
+  @media(min-width:720px){.feat-grid{grid-template-columns:repeat(3,1fr);}}
+  .feat-card{
+    background:var(--paper);padding:40px 34px;
+    transition:background .35s var(--ease), transform .35s var(--ease);
+  }
+  .feat-card:hover{background:var(--paper-2);transform:translateY(-4px);}
+  .feat-icon{
+    width:42px;height:42px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(184,92,46,0.1);color:var(--rust);margin-bottom:22px;
+  }
+  .feat-card h3{font-size:1.2rem;margin-bottom:10px;font-weight:500;}
+  .feat-card p{color:var(--ink-soft);font-size:0.94rem;margin:0;}
+
+  /* ---------- FLOOR / LAYOUT NOTE ---------- */
+  .layout-band{
+    background:var(--ink);color:var(--paper);border-radius:2px;
+    padding:64px 6vw;display:grid;grid-template-columns:1fr;gap:40px;
+  }
+  @media(min-width:900px){.layout-band{grid-template-columns:1fr 1fr;padding:72px;}}
+  .layout-band h2{color:#F6F3EC;font-size:clamp(1.9rem,3.6vw,2.6rem);margin-bottom:20px;}
+  .layout-band p{color:#C8C2B4;font-size:1rem;max-width:46ch;}
+  .layout-list{list-style:none;margin:30px 0 0;padding:0;display:flex;flex-direction:column;gap:0;}
+  .layout-list li{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:16px 0;border-top:1px solid rgba(246,243,236,0.14);
+    font-size:0.95rem;
+  }
+  .layout-list li:last-child{border-bottom:1px solid rgba(246,243,236,0.14);}
+  .layout-list span:first-child{color:#F1ECE1;}
+  .layout-list span:last-child{color:#D8A47F;font-family:'Fraunces';font-size:1.05rem;}
+
+  /* ---------- PRICING / CTA ---------- */
+  .cta-card{
+    position:relative;overflow:hidden;border-radius:2px;
+    background:linear-gradient(135deg, #C1662F 0%, #9A4A22 100%);
+    color:#F9F1E7;padding:64px 6vw;
+    display:grid;grid-template-columns:1fr;gap:40px;align-items:center;
+  }
+  @media(min-width:900px){.cta-card{grid-template-columns:1.2fr 1fr;padding:72px;}}
+  .cta-card h2{color:#FBF3E8;font-size:clamp(2rem,4vw,2.9rem);}
+  .cta-card p{color:#F3DFC9;margin-top:16px;max-width:46ch;}
+  .price-panel{
+    background:rgba(249,241,231,0.08);
+    border:1px solid rgba(249,241,231,0.24);
+    padding:36px;backdrop-filter:blur(6px);
+  }
+  .price-panel .amount{font-family:'Fraunces';font-size:3rem;display:flex;align-items:baseline;gap:8px;}
+  .price-panel .amount span{font-size:1rem;font-family:'Inter';font-weight:500;color:#F3DFC9;}
+  .price-panel ul{list-style:none;padding:0;margin:24px 0 30px;display:flex;flex-direction:column;gap:12px;font-size:0.92rem;}
+  .price-panel li{display:flex;gap:10px;align-items:center;color:#FBF3E8;}
+  .price-panel li svg{flex-shrink:0;}
+  .cta-card .btn-primary{background:#F9F1E7;color:#9A4A22;width:100%;justify-content:center;padding:14px 22px;}
+  .cta-card .btn-primary:hover{background:#fff;box-shadow:0 10px 24px -10px rgba(0,0,0,0.35);}
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{display:grid;grid-template-columns:1fr;gap:60px;}
+  @media(min-width:900px){.contact-grid{grid-template-columns:1fr 1fr;}}
+  .field{margin-bottom:20px;}
+  .field label{display:block;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-soft);margin-bottom:8px;font-weight:600;}
+  .field input, .field textarea{
+    width:100%;padding:14px 16px;border:1px solid var(--line);background:var(--paper-2);
+    border-radius:1px;font-family:'Inter';font-size:0.95rem;color:var(--ink);
+    transition:border-color .25s var(--ease), background .25s var(--ease);
+  }
+  .field input:focus, .field textarea:focus{
+    outline:none;border-color:var(--rust);background:var(--paper);
+  }
+  .field textarea{resize:vertical;min-height:120px;}
+  .contact-info{display:flex;flex-direction:column;gap:28px;}
+  .contact-info .row{display:flex;gap:18px;align-items:flex-start;}
+  .contact-info .row .ic{
+    width:40px;height:40px;border-radius:50%;background:rgba(140,150,134,0.14);color:var(--sage);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .contact-info .row h3{font-size:1.02rem;font-weight:600;font-family:'Inter';}
+  .contact-info .row p{margin:4px 0 0;color:var(--ink-soft);font-size:0.92rem;}
+
+  footer{
+    border-top:1px solid var(--line);padding:44px 6vw;
+    display:flex;flex-direction:column;gap:16px;
+    font-size:0.82rem;color:var(--ink-soft);
+  }
+  @media(min-width:760px){footer{flex-direction:row;justify-content:space-between;align-items:center;}}
+
+  /* ---------- LIGHTBOX ---------- */
+  .lightbox{
+    position:fixed;inset:0;z-index:100;background:rgba(20,17,14,0.94);
+    display:flex;align-items:center;justify-content:center;
+    opacity:0;pointer-events:none;transition:opacity .3s var(--ease);
+  }
+  .lightbox.open{opacity:1;pointer-events:auto;}
+  .lightbox img{max-width:88vw;max-height:82vh;object-fit:contain;border-radius:2px;}
+  .lightbox .lb-close{
+    position:absolute;top:28px;right:6vw;color:#F6F3EC;font-size:0.85rem;
+    letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:8px;
+  }
+  .lightbox .lb-nav{
+    position:absolute;top:50%;transform:translateY(-50%);
+    width:46px;height:46px;border-radius:50%;border:1px solid rgba(246,243,236,0.3);
+    display:flex;align-items:center;justify-content:center;color:#F6F3EC;cursor:pointer;
+    transition:background .25s var(--ease), border-color .25s var(--ease);
+  }
+  .lightbox .lb-nav:hover{background:rgba(246,243,236,0.1);border-color:#F6F3EC;}
+  .lb-prev{left:5vw;} .lb-next{right:5vw;}
+
+  ::selection{background:var(--rust);color:#fff;}
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="logo">Studio <span>Pontoise</span></div>
+  <nav class="links">
+    <a href="#appartement">L'appartement</a>
+    <a href="#galerie">Galerie</a>
+    <a href="#prestations">Prestations</a>
+    <a href="#tarifs">Tarifs</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <a href="#contact" class="btn btn-primary">Réserver une visite</a>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-media">
+    <img src="images/img-36acb0a43b.jpeg" alt="Salon lumineux sous verrière" fetchpriority="high">
+  </div>
+  <div class="hero-scrim"></div>
+
+  <div class="scroll-cue"><span class="line"></span> Défiler</div>
+
+  <div class="hero-meta">
+    <div><div class="num">26,5 m²</div><div class="lbl">Loi Carrez</div></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Studio meublé · Centre-ville de Pontoise</div>
+    <h1>Un studio tout neuf,<br>en plein <em>cœur</em><br>de Pontoise.</h1>
+    <p class="hero-sub">Rénovation totale, 2ᵉ étage très clair, à 5 minutes à pied de la gare de Pontoise. Coup de cœur assuré.</p>
+    <div class="hero-cta-row">
+      <a href="#contact" class="btn btn-primary">Demander une visite</a>
+      <a href="#appartement" class="btn btn-ghost" style="color:#F6F3EC;border-color:rgba(246,243,236,0.35);">Découvrir le bien ↓</a>
+    </div>
+    <p style="margin-top:22px;font-size:0.82rem;color:#E9E4D8;opacity:0;animation:riseIn 1s var(--ease) .95s forwards;letter-spacing:0.02em;">Libre à compter du <strong style="color:#E4A876;">samedi 20 juin 2026</strong></p>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section id="appartement">
+  <div class="wrap">
+    <div class="intro">
+      <div class="intro-figure reveal">
+        <img src="images/img-fc0c7e3f1f.jpeg" alt="Espace de vie avec rangements et coin télévision">
+        <div class="intro-badge">
+          <div class="num">5 min</div>
+          <div class="lbl">à pied de la gare de Pontoise (350 m)</div>
+        </div>
+      </div>
+
+      <div class="intro-text">
+        <div class="eyebrow reveal">Le studio</div>
+        <h2 class="drop reveal reveal-1" style="margin-top:14px;">Au calme, en centre-ville de Pontoise, à deux pas de tout.</h2>
+        <p class="reveal reveal-2">Situé au 2ᵉ étage d'un immeuble calme en plein centre-ville, ce studio meublé a fait l'objet d'une rénovation totale : électricité, plomberie, cuisine et salle de bain entièrement refaites. L'appartement est très lumineux, avec des prestations soignées du sol au plafond — il est littéralement tout neuf.</p>
+        <p class="reveal reveal-3">À 5 minutes à pied de la gare de Pontoise et à 20 minutes en bus du pôle universitaire de Cergy-Pontoise (ESSEC, CY Tech, ECAM, facultés), c'est un emplacement idéal pour un étudiant, un jeune actif ou toute personne cherchant un pied-à-terre pratique et confortable.</p>
+
+        <div class="stat-row reveal reveal-4">
+          <div class="stat"><b>26,5 m²</b><span>Loi Carrez</span></div>
+          <div class="stat"><b>2ᵉ</b><span>Étage, très lumineux</span></div>
+          <div class="stat"><b>350 m</b><span>De la gare de Pontoise</span></div>
+          <div class="stat"><b>20 min</b><span>Bus — pôle universitaire</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="galerie" style="background:var(--paper-2);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Galerie</div>
+      <h2>Chaque espace, en détail.</h2>
+      <p>Onze photographies pour se projeter — appartement tout neuf, rénové du sol au plafond.</p>
+    </div>
+
+    <div class="gallery-grid reveal reveal-1" id="galleryGrid">
+      <div class="g-item g-a" data-full="images/img-36acb0a43b.jpeg" data-caption="Salon — canapé & verrière">
+        <img src="images/img-36acb0a43b.jpeg" alt="Canapé sous la verrière"><span class="g-tag">Salon</span>
+      </div>
+      <div class="g-item g-b" data-full="images/img-e500693e99.jpeg" data-caption="Cuisine ouverte">
+        <img src="images/img-e500693e99.jpeg" alt="Cuisine ouverte en bois"><span class="g-tag">Cuisine</span>
+      </div>
+      <div class="g-item g-c" data-full="images/img-fc0c7e3f1f.jpeg" data-caption="Coin télévision & rangements">
+        <img src="images/img-fc0c7e3f1f.jpeg" alt="Coin télévision et rangements"><span class="g-tag">Séjour</span>
+      </div>
+      <div class="g-item g-d" data-full="images/img-c3427d1078.jpeg" data-caption="Salle d'eau — douche à l'italienne">
+        <img src="images/img-c3427d1078.jpeg" alt="Salle d'eau avec douche"><span class="g-tag">Salle d'eau</span>
+      </div>
+      <div class="g-item g-e" data-full="images/img-1b33164d91.jpeg" data-caption="Coin repas sous velux">
+        <img src="images/img-1b33164d91.jpeg" alt="Table à manger sous velux"><span class="g-tag">Repas</span>
+      </div>
+      <div class="g-item g-f" data-full="images/img-b983177a8b.jpeg" data-caption="Bar & tabourets hairpin">
+        <img src="images/img-b983177a8b.jpeg" alt="Bar de cuisine avec tabourets"><span class="g-tag">Bar</span>
+      </div>
+      <div class="g-item g-d" data-full="images/img-120b510162.jpeg" data-caption="Crédence carrelage & plan chêne">
+        <img src="images/img-120b510162.jpeg" alt="Crédence de la cuisine"><span class="g-tag">Détail</span>
+      </div>
+      <div class="g-item g-e" data-full="images/img-c2f35d8cdf.jpeg" data-caption="Dressing miroité & rangement technique">
+        <img src="images/img-c2f35d8cdf.jpeg" alt="Dressing avec porte miroir"><span class="g-tag">Dressing</span>
+      </div>
+      <div class="g-item g-f" data-full="images/img-dc1f60e3a2.jpeg" data-caption="Rangements sur mesure sous combles">
+        <img src="images/img-dc1f60e3a2.jpeg" alt="Placard sous les combles"><span class="g-tag">Rangement</span>
+      </div>
+      <div class="g-item g-d" data-full="images/img-80dd7f1786.jpeg" data-caption="Canapé convertible">
+        <img src="images/img-80dd7f1786.jpeg" alt="Canapé sous poutres apparentes"><span class="g-tag">Salon</span>
+      </div>
+      <div class="g-item g-e" data-full="images/img-409edb994a.jpeg" data-caption="WC indépendant">
+        <img src="images/img-409edb994a.jpeg" alt="WC indépendant"><span class="g-tag">WC</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="prestations">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Prestations</div>
+      <h2>Tout est déjà là.</h2>
+      <p>Un studio entièrement équipé, prêt à vivre dès la remise des clés.</p>
+    </div>
+
+    <div class="feat-grid reveal reveal-1">
+      <div class="feat-card">
+        <div class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 21V9l8-6 8 6v12"/><path d="M9 21v-6h6v6"/></svg></div>
+        <h3>Rénovation totale</h3>
+        <p>Électricité, plomberie, cuisine et salle de bain entièrement refaites — l'appartement est tout neuf.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 21V9l3-6 3 6v12"/><rect x="4" y="4" width="16" height="16" rx="1" opacity="0"/><path d="M3 21h18"/></svg></div>
+        <h3>Séjour tout équipé</h3>
+        <p>Écran plat 43", canapé-lit 2 places, table basse, commode et placard.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13h18M5 13V9a2 2 0 012-2h10a2 2 0 012 2v4M6 17h.01M18 17h.01"/></svg></div>
+        <h3>Cuisine équipée neuve</h3>
+        <p>Réfrigérateur, plaque à induction, four micro-ondes, lave-linge et vaisselle fournie.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h16M4 12a2 2 0 002 2h12a2 2 0 002-2M4 12V7a2 2 0 012-2h3M9 21h6"/></svg></div>
+        <h3>Petit bar & 2 tabourets</h3>
+        <p>Coin repas convivial intégré à la cuisine, parfait pour un repas rapide ou un café.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <h3>Salle d'eau complète</h3>
+        <p>Douche, petit placard, miroir LED et WC — le tout neuf et compact.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <h3>Emplacement idéal</h3>
+        <p>350 m de la gare de Pontoise (5 min à pied), 20 min en bus du pôle universitaire de Cergy-Pontoise.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LAYOUT BAND -->
+<section>
+  <div class="wrap">
+    <div class="layout-band reveal">
+      <div>
+        <div class="eyebrow" style="color:#D8A47F;">Configuration</div>
+        <h2 style="margin-top:16px;">Un plan compact, sans rien de superflu.</h2>
+        <p>Studio au calme en centre-ville de Pontoise, 2ᵉ étage, très lumineux — pensé pour vivre confortablement au quotidien.</p>
+      </div>
+      <ul class="layout-list">
+        <li><span>Surface totale</span><span>26,5 m²</span></li>
+        <li><span>Étage</span><span>2ᵉ étage</span></li>
+        <li><span>Séjour</span><span>TV 43", canapé-lit 2 places</span></li>
+        <li><span>Cuisine</span><span>Équipée neuve + bar 2 places</span></li>
+        <li><span>Salle d'eau</span><span>Douche, placard, miroir LED, WC</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING / CTA -->
+<section id="tarifs">
+  <div class="wrap">
+    <div class="cta-card reveal">
+      <div>
+        <div class="eyebrow" style="color:#F9DDBB;">Disponibilité</div>
+        <h2 style="margin-top:16px;">Libre dès le samedi 20 juin 2026.</h2>
+        <p>Aucun frais d'agence, aucun frais d'état des lieux. Pour organiser une visite, merci de nous transmettre votre dossier au préalable.</p>
+      </div>
+      <div class="price-panel">
+        <div class="amount">780 € <span>/ mois, charges comprises</span></div>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Charges générales & eau froide incluses</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Dépôt de garantie : 1 460 € (2 mois hors charges)</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Pas de frais d'agence ni d'état des lieux</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Garant solide exigé ou caution Visale acceptée</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary">Demander une visite</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Contact</div>
+      <h2>Organisons une visite.</h2>
+      <p>Laissez vos coordonnées ci-dessous. Pour accélérer l'organisation de la visite, merci de nous transmettre par avance : votre pièce d'identité, vos 3 dernières fiches de paie, votre dernier avis d'imposition et un garant solide (ou caution Visale acceptée).</p>
+    </div>
+
+    <div class="contact-grid reveal reveal-1">
+      <form id="contactForm" action="mailto:bertrand.gruez@cevalogistics.com" method="post" enctype="text/plain">
+        <div class="field">
+          <label for="name">Nom complet</label>
+          <input id="name" name="Nom" type="text" placeholder="Jeanne Dupont" required>
+        </div>
+        <div class="field">
+          <label for="email">E-mail</label>
+          <input id="email" name="Email" type="email" placeholder="jeanne@exemple.fr" required>
+        </div>
+        <div class="field">
+          <label for="phone">Téléphone</label>
+          <input id="phone" name="Téléphone" type="tel" placeholder="06 12 34 56 78">
+        </div>
+        <div class="field">
+          <label for="msg">Message</label>
+          <textarea id="msg" name="Message" placeholder="Date de visite souhaitée, durée de location envisagée…"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Envoyer la demande</button>
+      </form>
+
+      <div class="contact-info">
+        <div class="row">
+          <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+          <div><h3>Par téléphone</h3><p>+33 6 80 47 07 30 — du lundi au samedi, 9h–19h</p></div>
+        </div>
+        <div class="row">
+          <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6l-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg></div>
+          <div><h3>Par e-mail</h3><p>bertrand.gruez@cevalogistics.com</p></div>
+        </div>
+        <div class="row">
+          <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><h3>Adresse</h3><p>Centre-ville de Pontoise, 2ᵉ étage — à 350 m de la gare de Pontoise</p></div>
+        </div>
+        <div class="row">
+          <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 15h6M9 11h6"/></svg></div>
+          <div><h3>Dossier à fournir</h3><p>Pièce d'identité, 3 dernières fiches de paie, dernier avis d'imposition, garant solide ou caution Visale.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>© 2026 Studio Pontoise. Tous droits réservés.</div>
+  <div>Aucun frais d'agence — aucun frais d'état des lieux.</div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div class="lb-close" id="lbClose">Fermer ✕</div>
+  <div class="lb-nav lb-prev" id="lbPrev">‹</div>
+  <img id="lbImg" src="" alt="">
+  <div class="lb-nav lb-next" id="lbNext">›</div>
+</div>
+
+<script>
+  // header scroll state
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.14 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // lightbox
+  const items = Array.from(document.querySelectorAll('.g-item'));
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  let idx = 0;
+
+  function openLb(i){
+    idx = i;
+    lbImg.src = items[idx].dataset.full;
+    lbImg.alt = items[idx].dataset.caption;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLb(){
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function step(delta){
+    idx = (idx + delta + items.length) % items.length;
+    lbImg.src = items[idx].dataset.full;
+    lbImg.alt = items[idx].dataset.caption;
+  }
+  items.forEach((it, i) => it.addEventListener('click', () => openLb(i)));
+  document.getElementById('lbClose').addEventListener('click', closeLb);
+  document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+  document.getElementById('lbNext').addEventListener('click', () => step(1));
+  lb.addEventListener('click', (e) => { if (e.target === lb) closeLb(); });
+  window.addEventListener('keydown', (e) => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLb();
+    if (e.key === 'ArrowRight') step(1);
+    if (e.key === 'ArrowLeft') step(-1);
+  });
+
+  // contact form -> mailto fallback with friendly confirmation
+  document.getElementById('contactForm').addEventListener('submit', function(){
+    // native mailto submit handles it; no extra JS required
+  });
+</script>
+</body>
+</html>
